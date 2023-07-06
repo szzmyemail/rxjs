@@ -1,0 +1,34 @@
+#### Subject是一种特殊类型的observable。允许将值多播给多个观察者，所以Subject是多播的，而普通的Observable是单播的，即每个已订阅的观察者都拥有Observable的独立执行。
+
+subject像是observable，但是可以多播给多个观察者。Subject还像是EventEmitters,维护着多个监听器的注册表。
+
+在Subject的内部，subscribe不会调用发送值得新执行。它只是将给定的观察者注册到观察者列表中，类似于其他库或语言中的addListener的工作方式。
+
+![image-20230706142626379](/Users/lilysong/Library/Application Support/typora-user-images/image-20230706142626379.png)
+
+##### 每个Subject都是observable。
+
+对于Subject，可以提供一个观察者并使用subscribe方法，就可开始正常接收值。
+
+##### 每个Subject都是观察者。
+
+Subject是一个有如下方法的对象：next(v),error(e),complete()。要给Subject提供新值，只要调用next(theValue),它会将值多播给已注册监听该Subject的观察者们。
+
+因为Subject是观察者，这也就意味着你可以吧Subject座位参数传给任何observable的subscribe方法，如下：
+
+<img src="/Users/lilysong/Library/Application Support/typora-user-images/image-20230706144423681.png" alt="image-20230706144423681" style="zoom:50%;" />
+
+![image-20230706144444530](/Users/lilysong/Library/Application Support/typora-user-images/image-20230706144444530.png)
+
+使用上面的方法，我们基本上只是通过 Subject 将单播的 Observable 执行转换为多播的。这也说明了 Subjects 是将任意 Observable 执行共享给多个观察者的唯一方式。
+
+还有一些特殊类型的 `Subject`：`BehaviorSubject`、`ReplaySubject` 和 `AsyncSubject`。
+
+
+
+observable的subscribe方法可以接收两类参数：
+
+![image-20230706145254678](/Users/lilysong/Library/Application Support/typora-user-images/image-20230706145254678.png)
+
+
+
