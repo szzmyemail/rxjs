@@ -72,7 +72,7 @@ console.log('before');
 foo.subscribe(res => console.log(res));
 console.log('after');
 //"before"
-//"Hello"
+// 1
 //42
 //100
 //200
